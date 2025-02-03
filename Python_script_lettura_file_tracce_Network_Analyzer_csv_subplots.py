@@ -143,6 +143,13 @@ ax2.axvline(x = x4, color ='red', linewidth=1.5, linestyle='--')
 ax1.axhline(y = y1, color ='magenta', linewidth=2, linestyle='--')
 ax2.axhline(y = y1, color ='magenta', linewidth=2, linestyle='--')
 
+# Evidenzio l'area 'OK' per le curve delle antenne
+ax1.axvspan(x1, x2, ymin = range_y_1_dB[0], ymax = y1, facecolor='y', alpha=0.5)
+ax1.axvspan(x3, x4, ymin = range_y_1_dB[0], ymax = y1, facecolor='y', alpha=0.5)
+
+ax2.axvspan(x1, x2, ymin = range_y_1_dB[0], ymax = y1, facecolor='y', alpha=0.5)
+ax2.axvspan(x3, x4, ymin = range_y_1_dB[0], ymax = y1, facecolor='y', alpha=0.5)
+
 # Plot delle tracce alle varie frequenze ##############################
 for ind in range(0,len(root.filenames)):
     # Costruisco la legenda con le frequenze delle risonanze
