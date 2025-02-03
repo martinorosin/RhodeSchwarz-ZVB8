@@ -144,11 +144,17 @@ ax1.axhline(y = y1, color ='magenta', linewidth=2, linestyle='--')
 ax2.axhline(y = y1, color ='magenta', linewidth=2, linestyle='--')
 
 # Evidenzio l'area 'OK' per le curve delle antenne
-ax1.axvspan(x1, x2, ymin = range_y_1_dB[0], ymax = y1, facecolor='y', alpha=0.5)
-ax1.axvspan(x3, x4, ymin = range_y_1_dB[0], ymax = y1, facecolor='y', alpha=0.5)
+ymax1 = (y1 - range_y_1_dB[0]) / (range_y_1_dB[1] - range_y_1_dB[0])
+ymax2 = (y1 - range_y_2_dB[0]) / (range_y_2_dB[1] - range_y_2_dB[0])
 
-ax2.axvspan(x1, x2, ymin = range_y_1_dB[0], ymax = y1, facecolor='y', alpha=0.5)
-ax2.axvspan(x3, x4, ymin = range_y_1_dB[0], ymax = y1, facecolor='y', alpha=0.5)
+ax1.axvspan(x1, x2, ymin = 0, ymax = ymax1, color='green', alpha=0.2)
+ax1.axvspan(x3, x4, ymin = 0, ymax = ymax2, color='green', alpha=0.2)
+
+ax2.axvspan(x1, x2, ymin = 0, ymax = ymax1, color='green', alpha=0.2)
+ax2.axvspan(x3, x4, ymin = 0, ymax = ymax2, color='green', alpha=0.2)
+
+# PLOTTO MOMENTANEAMENTE - ELIMINARE DOPO IL DEBUG
+# plt.show()
 
 # Plot delle tracce alle varie frequenze ##############################
 for ind in range(0,len(root.filenames)):
