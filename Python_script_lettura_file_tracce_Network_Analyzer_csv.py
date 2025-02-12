@@ -12,6 +12,7 @@ import matplotlib.pyplot as plt
 import csv
 import tkinter as tk
 from tkinter import filedialog
+import martino_pylib
 
 
 ### SETUP: variabili, ... ##########################
@@ -26,8 +27,8 @@ x4=928
 y1= -6
 
 # Range ricerca minimi (frequenze in MHz) e xlim plottaggi
-range1_MHz=350,550
-range2_MHz=700,1200
+range1_MHz=700,1000
+range2_MHz=2200,2700
 #####################################################
 
 
@@ -75,16 +76,18 @@ for filename in root.filenames:
     
     # Calcolo il minimo di S11 nei due range e lo metto in lista come tupla (freq_Hz, valore)
     # RANGE1
-    Freq_Hz_range1_from_ind=lista_freq.index(min([item for item in lista_freq if item >= range1_MHz[0]*1e6]))
-    Freq_Hz_range1_to_ind=lista_freq.index(max([item for item in lista_freq if item <= range1_MHz[1]*1e6]))
+    [Freq_Hz_range1_from_ind,Freq_Hz_range1_to_ind], valori = martino_pylib.trova_in_lista(lista_freq,[item*1e6 for item in range1_MHz])
+   
     min_dB=min(lista_S11_dB[Freq_Hz_range1_from_ind:Freq_Hz_range1_to_ind])
-    S11_peakmin_range1.append((lista_freq[lista_S11_dB.index(min_dB)]/1e6,min_dB))
+    lista_freq_range1_MHz = lista_freq[Freq_Hz_range1_from_ind:Freq_Hz_range1_to_ind]
+    S11_peakmin_range1.append((lista_freq_range1_MHz[lista_S11_dB[Freq_Hz_range1_from_ind:Freq_Hz_range1_to_ind].index(min_dB)]/1e6,min_dB))
 
     # RANGE2
-    Freq_Hz_range2_from_ind=lista_freq.index(min([item for item in lista_freq if item >= range2_MHz[0]*1e6]))
-    Freq_Hz_range2_to_ind=lista_freq.index(max([item for item in lista_freq if item <= range2_MHz[1]*1e6]))
+    [Freq_Hz_range2_from_ind,Freq_Hz_range2_to_ind], valori = martino_pylib.trova_in_lista(lista_freq,[item*1e6 for item in range2_MHz])
+    
     min_dB=min(lista_S11_dB[Freq_Hz_range2_from_ind:Freq_Hz_range2_to_ind])
-    S11_peakmin_range2.append((lista_freq[lista_S11_dB.index(min_dB)]/1e6,min_dB))
+    lista_freq_range2_MHz = lista_freq[Freq_Hz_range2_from_ind:Freq_Hz_range2_to_ind]
+    S11_peakmin_range2.append((lista_freq_range2_MHz[lista_S11_dB[Freq_Hz_range2_from_ind:Freq_Hz_range2_to_ind].index(min_dB)]/1e6,min_dB))
 
 
 # Aggiungo etichette e titoli alla figura #######################

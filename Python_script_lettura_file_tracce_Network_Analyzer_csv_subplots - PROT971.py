@@ -84,13 +84,15 @@ for filename in root.filenames:
     [Freq_Hz_range1_from_ind,Freq_Hz_range1_to_ind], valori = martino_pylib.trova_in_lista(lista_freq,[item*1e6 for item in range1_MHz])
    
     min_dB=min(lista_S11_dB[Freq_Hz_range1_from_ind:Freq_Hz_range1_to_ind])
-    S11_peakmin_range1.append((lista_freq[lista_S11_dB.index(min_dB)]/1e6,min_dB))
+    lista_freq_range1_MHz = lista_freq[Freq_Hz_range1_from_ind:Freq_Hz_range1_to_ind]
+    S11_peakmin_range1.append((lista_freq_range1_MHz[lista_S11_dB[Freq_Hz_range1_from_ind:Freq_Hz_range1_to_ind].index(min_dB)]/1e6,min_dB))
 
     # RANGE2
     [Freq_Hz_range2_from_ind,Freq_Hz_range2_to_ind], valori = martino_pylib.trova_in_lista(lista_freq,[item*1e6 for item in range2_MHz])
     
     min_dB=min(lista_S11_dB[Freq_Hz_range2_from_ind:Freq_Hz_range2_to_ind])
-    S11_peakmin_range2.append((lista_freq[lista_S11_dB.index(min_dB)]/1e6,min_dB))
+    lista_freq_range2_MHz = lista_freq[Freq_Hz_range2_from_ind:Freq_Hz_range2_to_ind]
+    S11_peakmin_range2.append((lista_freq_range2_MHz[lista_S11_dB[Freq_Hz_range2_from_ind:Freq_Hz_range2_to_ind].index(min_dB)]/1e6,min_dB))
 
 # Predispongo due subplots: superiore per banda bassa ed inferiore per banda alta
 
