@@ -31,7 +31,7 @@ attesa=2
 
 # Apre gestore VISA e crea gli alias degli strumenti in VISA
 rm = pyvisa.ResourceManager()
-Vector_NA = rm.open_resource('GPIB1::'+str(ZVB8_gpib_addr)+'::INSTR')
+Vector_NA = rm.open_resource('GPIB2::'+str(ZVB8_gpib_addr)+'::INSTR')
 
 
 # Identificazione strumenti per verificare la loro connessione

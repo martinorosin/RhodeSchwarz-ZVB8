@@ -31,8 +31,8 @@ range1_MHz=600,1200
 range2_MHz=2200,2700
 
 # Range assi y (dB) dei grafici
-range_y_1_dB=[-35,5]
-range_y_2_dB=[-35,5]
+range_y_1_dB=[-20,5]
+range_y_2_dB=[-20,5]
 
 #####################################################
 
