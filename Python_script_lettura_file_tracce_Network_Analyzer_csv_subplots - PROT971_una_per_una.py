@@ -147,26 +147,38 @@ ax2.axhline(y = y1, color ='green', linewidth=2)
 
 # Plot delle tracce alle varie frequenze ##############################
 for ind in range(0,len(root.filenames)):
+    
     # Costruisco la legenda con le frequenze delle risonanze
     legenda_base='S11 of '+ root.filenames[ind].rsplit("/",1)[1].rsplit(".",1)[0]+': '
     legenda_low='1st res= '+'{:4.1f}'.format(S11_peakmin_range1[ind][0])+' MHz'
     legenda_up='2nd res= '+'{:4.1f}'.format(S11_peakmin_range2[ind][0])+' MHz'
 
-    ax1.plot([fr/1e6 for fr in Freq_Hz[ind]],S11_dB[ind],'o-',
+    h1, = ax1.plot([fr/1e6 for fr in Freq_Hz[ind]],S11_dB[ind],'o-',
              linewidth=1,markersize=1,label=legenda_base+legenda_low)
-    ax2.plot([fr/1e6 for fr in Freq_Hz[ind]],S11_dB[ind],'o-',
+    h2, = ax2.plot([fr/1e6 for fr in Freq_Hz[ind]],S11_dB[ind],'o-',
              linewidth=1,markersize=1,label=legenda_base+legenda_up)
     plt.show(block=False)
 
 
-# plt.annotate('max = '+str(max(Pout_dBm))+' dBm', xy=(max(Pin_dBm), max(Pout_dBm)-0.5), xytext=(max(Pin_dBm)-2.75, max(Pout_dBm)-5),
-#              arrowprops=dict(facecolor='magenta', shrink=0.05),
-#              )
+    # plt.annotate('max = '+str(max(Pout_dBm))+' dBm', xy=(max(Pin_dBm), max(Pout_dBm)-0.5), xytext=(max(Pin_dBm)-2.75, max(Pout_dBm)-5),
+    #              arrowprops=dict(facecolor='magenta', shrink=0.05),
+    #              )
 
-ax1.legend()
-ax2.legend()
-# fig.tight_layout()
-plt.show(block=False)
+    ax1.legend()
+    ax2.legend()
+    # fig.tight_layout()
+    fig.canvas.draw()
+    fig.canvas.flush_events()
+    plt.show(block=False)
 
 
-input("Premi [ENTER] per finire")
+    input("Premi [ENTER] per finire")
+
+    # Rimuove le linee per consentire di vederne una alla volta
+    h1.remove()
+    h2.remove()
+    
+    plt.show(block=False)
+
+    
+    

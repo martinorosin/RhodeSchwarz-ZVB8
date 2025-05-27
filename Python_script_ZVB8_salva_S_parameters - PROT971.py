@@ -31,7 +31,7 @@ attesa=2
 
 # Apre gestore VISA e crea gli alias degli strumenti in VISA
 rm = pyvisa.ResourceManager()
-Vector_NA = rm.open_resource('GPIB2::'+str(ZVB8_gpib_addr)+'::INSTR')
+Vector_NA = rm.open_resource('GPIB0::'+str(ZVB8_gpib_addr)+'::INSTR')
 
 
 # Identificazione strumenti per verificare la loro connessione
@@ -52,11 +52,6 @@ Vector_NA.write("CALC1:PAR:SEL 'Trc1';")
 
 # Network Analyzer - Attendo che non abbia operazioni pendenti
 ans=Vector_NA.query("*OPC?")
-
-#############################################################
-# Dialogo per selezionare file di tipo CSV su cui salvare i dati
-root.filename = tk.filedialog.asksaveasfilename(initialdir = "Download",initialfile='SPar_'+'.csv',title = "Select file",filetypes = (("Excel - CSV file","*.csv"),("all files","*.*")))
-#############################################################
 
 # Chiedo all'utente numero progressivo antenna in misura
 # ind_ant = simpledialog.askinteger("Progressivo Antenna in misura...",
@@ -82,7 +77,7 @@ Tr1_S11_dB=Tr1_S11_dB.split(",")
 ans=Vector_NA.query("*OPC?")
 
 # Leggo Tr6 - S21: Seleziono Traccia / Imposto formato / Leggo l'array di dati
-Vector_NA.write("CALC2:PAR:SEL 'Trc6';")
+Vector_NA.write("CALC2:PAR:SEL 'Trc7';")
 Vector_NA.write("CALC2:FORM MLOG;")
 Tr6_S21_dB=Vector_NA.query("CALC2:DATA? FDAT;")
 Tr6_S21_dB=Tr6_S21_dB.split(",")
@@ -97,6 +92,11 @@ ans=Vector_NA.query("*OPC?")
 # Directory_NA="'D:20231214 Misure Ant Biband 068'"
 # Vector_NA.write(":MMEMory:CDIRectory '"+Directory_NA+"';")
 # Vector_NA.write(":MMEMory:STORe:TRACe:PORTs 1, '"+root.filename.rsplit("/",1)[1].rsplit(".",1)[0]+".s2p"+"', COMPlex, 1, 2")
+
+#############################################################
+# Dialogo per selezionare file di tipo CSV su cui salvare i dati
+root.filename = tk.filedialog.asksaveasfilename(initialdir = "Download",initialfile='20250627_ANT068_00'+'.csv',title = "Select file",filetypes = (("Excel - CSV file","*.csv"),("all files","*.*")))
+#############################################################
 
 # Scrittura su file CSV dei dati misurati, prima intestazione poi i dati
 with open(root.filename.rsplit("/",1)[0]+"/"+root.filename.rsplit("/",1)[1].rsplit(".",1)[0]+".csv", mode='w', newline='') as file_csv:
